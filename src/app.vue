@@ -1,6 +1,6 @@
 
 <template>
-	<router-view></router-view>
+	<router-view id="app"></router-view>
 </template>
 
 <script>
@@ -16,14 +16,15 @@
 			}
 		},
 		 mounted() {
-		 
-			this.$events.on('hello', function(d){
-				console.log('-----------hello------------', d);
-			});
 			
 		 }
 	}
 </script>
 
 <style scoped>
+#app{
+	width: 100%;
+	height: 100%;
+	/* background-color: red; */
+}
 </style>

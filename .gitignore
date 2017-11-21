@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-node_modules
-=======
 
 node_modules
-TODO.md
-lib
-docs/_book
-examples/**/build.js
->>>>>>> 62b06c7e36bf59054d658b914745b59cbd7321da
+!dist/index.html
 

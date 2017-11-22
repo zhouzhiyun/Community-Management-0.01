@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar fixed-top h-100 bg-dark" :class="{'sidebar-short':flag}">
+    <div class="sidebar fixed-top h-100 bg-dark" :class="{'sidebar-short':flag}" v-if="dis">
         <nav class="navbar navbar-dark ">
             <button class="navbar-toggler btn-sm" type="button" @click="show">
                 <span class="navbar-toggler-icon"></span>
@@ -53,7 +53,8 @@
 		data(){
 			return {
                 short:'sidebar-short',
-                flag:false
+                flag:false,
+                dis: false
 			}
 		},
 		methods: {

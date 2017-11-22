@@ -5,8 +5,10 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
 	state:{
-       show: false,
-       text: ''
+       show: false, // 控制bdetails是否显示
+       text: '', // 楼号
+       roomNumber: '', // 房号
+       detailsShow: false   // 控制details是否显示
     },
 	mutations:{
         changeVal(state, payload){
@@ -15,6 +17,10 @@ const store = new Vuex.Store({
         },
         changeShow(state){
             state.show = false;
+        },
+        changeRoomNum(state, payload){
+            state.detailsShow = true;
+            state.roomNumber = payload.roomNumber
         }
     }
 });

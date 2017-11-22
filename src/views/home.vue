@@ -128,9 +128,8 @@
 		},
 		mounted(){
 			var vm = this;
-			var map = new BMap.Map("map");    // 创建Map实例
+			var map = new BMap.Map("map",{mapType:BMAP_SATELLITE_MAP});    // 创建Map实例
 			map.centerAndZoom(new BMap.Point(118.839323, 32.116994), 15);
-			map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
 			map.enableScrollWheelZoom(true);
 			map.setCurrentCity("南京");
 

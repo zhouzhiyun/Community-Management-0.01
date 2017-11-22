@@ -5,7 +5,7 @@
 		<building-deatils  v-if="this.$store.state.show"></building-deatils>
         <my-sidebar></my-sidebar>
 		<my-search></my-search>
-		<my-details></my-details>
+		<my-details v-if="this.$store.state.detailsShow"></my-details>
 	</div>
 </template>
 

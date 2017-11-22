@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body" id="lists" >
                 <div class="list" v-for="room in rooms">
-                    <span class="text" :style="{'background-color': room.color, cursor: 'pointer'}" @click="edit($event)" v-text="room.roomnumber"></span>
+                    <span class="text" :style="{'background-color': room.color, cursor: 'pointer'}" @click="edit(room)" v-text="room.roomnumber"></span>
                     <span class="text">
                         <span class="symbol" v-for="mark in room.mark" v-html="mark">
                         </span>
@@ -37,8 +37,8 @@ export default {
       close(){
           this.$store.commit('changeShow');
       },
-      edit(ev){
-          this.$store.commit('changeRoomNum', {roomNumber: ev.target.innerText})
+      edit(room){
+          this.$store.commit('changeRoomNum', room)
       }
   },
   mounted(){

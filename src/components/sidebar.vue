@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar fixed-top h-100 bg-dark" :class="{'sidebar-short':flag}" v-if="dis">
+    <div class="sidebar fixed-top h-100 bg-dark" :class="{'sidebar-short':flag}">
         <nav class="navbar navbar-dark ">
             <button class="navbar-toggler btn-sm" type="button" @click="show">
                 <span class="navbar-toggler-icon"></span>

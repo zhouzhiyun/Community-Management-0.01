@@ -8,7 +8,9 @@ const store = new Vuex.Store({
        show: false, // 控制bdetails是否显示
        text: '', // 楼号
        roomNumber: '', // 房号
-       detailsShow: false   // 控制details是否显示
+       detailsShow: false,   // 控制details是否显示
+       bgcolor: '',
+       mark: []
     },
 	mutations:{
         changeVal(state, payload){
@@ -20,7 +22,14 @@ const store = new Vuex.Store({
         },
         changeRoomNum(state, payload){
             state.detailsShow = true;
-            state.roomNumber = payload.roomNumber
+            state.show = false;
+            state.roomNumber = payload.roomnumber;
+            state.bgcolor = payload.color;
+            state.mark = payload.mark;
+        },
+        changeDetailsShow(state){
+            state.detailsShow = false;
+            state.show = true;
         }
     }
 });

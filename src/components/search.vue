@@ -45,9 +45,9 @@
 	#accordion{
 		width:360px;
 		position:absolute;
-		top:20px; 
+		top:40px; 
 		margin:0; 
-		right:20px; 
+		right:10px; 
 		z-index:9999;
 	}
 </style>

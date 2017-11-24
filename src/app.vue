@@ -9,7 +9,7 @@
 	import 'material-design-icons/iconfont/material-icons.css'
 	import 'bootstrap-material-design/dist/css/bootstrap-material-design.min.css';
 
-	export default{
+	export default {
 		data(){
 			return {
 				

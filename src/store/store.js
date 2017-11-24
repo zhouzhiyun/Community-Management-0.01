@@ -14,6 +14,7 @@ const store = new Vuex.Store({
        permissions: '', // 权限等级
        modify: '', //  允许修改
        username: '' // 用户名
+        
     },
 	mutations:{
         changeVal(state, payload){

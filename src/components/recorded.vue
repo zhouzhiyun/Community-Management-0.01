@@ -41,10 +41,10 @@
                     <div>
                         <label>房屋状态</label>
                         <select class="recordForm" v-model="houseInfo.type">
-                            <option value="出租房">出租房</option>
-                            <option value="自住房">自住房</option>
-                            <option value="装修房">装修房</option>
-                            <option value="未拿房">未拿房</option>
+                            <option value="&#916;">出租房</option>
+                            <option value="&#927;">自住房</option>
+                            <option value="&#10004;">装修房</option>
+                            <option value="&#9734;">未拿房</option>
                         </select>
                     </div>
                 </div>
@@ -132,15 +132,16 @@
                 <div class="col-4">
                     <div class="my-1">
                         <label class="custom-file">
-                            <input type="file" id="file2" class="custom-file-input" >
+                            <input type="file" id="file2" class="custom-file-input" :value="file" >
                             <span class="custom-file-control ">选择文件</span>
                         </label>
                     </div>
                     <div>
-                        <button type="button" class="btn btn-primary btn-person"> 
+                        <!--文件展示区-->
+                        <!--<button type="button" class="btn btn-primary btn-person"> 
                           
                             <span class=" mx-2" aria-hidden="true ">&times;</span>
-                        </button>
+                        </button>-->
                     </div>
                 </div>
                 <div class="col-8">
@@ -351,11 +352,12 @@
                 //保存所有录入信息
                 vm.disp=false;
                 for(var i in vm.db){
-                    console.log(vm.houseInfo.building+"--"+ vm.db[i].roomInfo.building);
-                    console.log(vm.houseInfo.roomNumber+"--"+ vm.db[i].roomInfo.roomNumber);
                     if(vm.houseInfo.building == vm.db[i].roomInfo.building && 
-                    vm.houseInfo.roomNumber == vm.db[i].roomInfo.roomNumber ){
-                        vm.db[i].tenants[0].tenantInfo.concat(vm.tenantArr);
+                    vm.houseInfo.roomNumber == vm.db[i].roomInfo.roomId ){
+                       // vm.db[i].tenants[0].tenantInfo.concat(vm.tenantArr);
+                        for(var j in vm.tenantArr){
+                             vm.db[i].tenants[0].tenantInfo.push(vm.tenantArr[j]);
+                        }
                         flag=false;
                     }
                 }
@@ -366,22 +368,16 @@
                        tenants:vm.tenant
                    }) ;                    
                 }
-
-
-                var data = {
-                    y: JSON.parse(JSON.stringify(vm.db))
-                };
-               
+                
                 $.ajax({
                     url:'/entering',
                     method:'post',
                     contentType: 'application/json',
                     data: JSON.stringify(vm.db),
                     success:function(val){
-                        console.log(val);
+                       
                     }
-                });
-               
+                });               
                 vm.initHouse();
             },
             cancel(){//取消
@@ -417,8 +413,8 @@
             });            
             axios.post('/getDB').then(function(req){
                 vm.db=req.data;
-                console.log('-------------------------');
-                console.log(req.data);
+                // console.log('-------------------------');
+                // console.log(req.data);
             }).catch(function (error) {
                 console.log(error);
             });

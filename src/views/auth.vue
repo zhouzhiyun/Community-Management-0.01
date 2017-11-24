@@ -26,7 +26,7 @@
 
 <script>
 import $ from 'jquery';
-	export default{
+	export default {
 		data(){
 			return {
 				username: '',

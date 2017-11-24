@@ -50,7 +50,10 @@
                                     <td>{{older.IDCard}}</td>
                                     <td>{{older.old}}</td>
                                     <td>{{older.phone}}</td>
-                                    <td>{{older.date}}</td>
+                                    <td>
+                                        <el-date-picker  v-model="older.date" editable type="date">
+                                        </el-date-picker>
+                                    </td>
                                     <td>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
@@ -69,7 +72,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                        
+                       
                     </div>
                 </div>
             </div>            
@@ -154,7 +157,7 @@
 
 <style scoped>
 #event{
-    width:770px;
+    width:840px;
     height:450px;
     position:absolute;
     top:100px;

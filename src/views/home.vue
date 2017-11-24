@@ -7,13 +7,10 @@
 		<my-search></my-search>
 		<my-details v-if="this.$store.state.detailsShow"></my-details>
         <recorded></recorded>
-<<<<<<< HEAD
         <message></message>
         <event-handing></event-handing>
         
-=======
         <user-manage v-if="this.$store.state.usermanage"></user-manage>
->>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 	</div>
 </template>
 
@@ -24,14 +21,11 @@
 	import myDetails from '../components/details.vue';
 	import buildingDeatils from "../components/bdetails.vue";
     import recorded from '../components/recorded.vue';
-<<<<<<< HEAD
     import eventHanding from '../components/eventHandling.vue';
     import message from '../components/message.vue';
-=======
     import Highcharts from 'highcharts';
     import userManage from "../components/usermanagement.vue";
 
->>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 	// 添加环形遮罩层
 	function createRingOverlay (corver, map){
         // 添加环形遮罩层
@@ -239,12 +233,9 @@
 			mySearch,
 			myDetails,
             recorded,
-<<<<<<< HEAD
             eventHanding,
-            message
-=======
+            message,
             userManage
->>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 		}
 	}
 	

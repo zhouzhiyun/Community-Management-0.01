@@ -13,15 +13,11 @@ const store = new Vuex.Store({
        tenants: [],
        permissions: '', // 权限等级
        modify: '', //  允许修改
-<<<<<<< HEAD
-       username: '' // 用户名
-        
-=======
-       username: '' ,// 用户名
+       username: '', // 用户名
+
        house: [],
        buildingId: '',
        usermanage: false
->>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
     },
 	mutations:{
         changeVal(state, payload){

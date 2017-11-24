@@ -6,16 +6,19 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state:{
        show: false, // 控制bdetails是否显示
-       text: '', // 楼号
-       roomNumber: '', // 房号
+       building: '', // 楼号
        detailsShow: false,   // 控制details是否显示
-       bgcolor: '',
-       mark: []
+       roomInfo: {},
+       owner: {},
+       tenants: [],
+       permissions: '', // 权限等级
+       modify: '', //  允许修改
+       username: '' // 用户名
     },
 	mutations:{
         changeVal(state, payload){
             state.show = true;
-            state.text = payload.text;
+            state.building = payload.text;
         },
         changeShow(state){
             state.show = false;
@@ -23,13 +26,19 @@ const store = new Vuex.Store({
         changeRoomNum(state, payload){
             state.detailsShow = true;
             state.show = false;
-            state.roomNumber = payload.roomnumber;
-            state.bgcolor = payload.color;
-            state.mark = payload.mark;
+            state.roomInfo = payload.roomInfo;
+            state.owner = payload.owner;
+            state.tenants = payload.tenants;
         },
         changeDetailsShow(state){
             state.detailsShow = false;
             state.show = true;
+        },
+        recordUserinfo(state, payload){
+            state.permissions = payload.permissions;
+            state.modify = payload.modify;
+            state.username = payload.name;
+            console.log(payload)
         }
     }
 });

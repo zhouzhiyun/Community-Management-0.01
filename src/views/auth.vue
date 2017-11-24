@@ -7,10 +7,10 @@
 				<h1 class="text-center">迈皋桥社区综合管理系统</h1>
 				<h4 class="text-center">登录</h4>
 				<div class="inp d-flex justify-content-center" style="width: 100%;">
-					<input class="input" type="text" name="username" placeholder="请输入用户名">
+					<input class="input" v-model="username" type="text" name="username" id="username" placeholder="请输入用户名">
 				</div>
 				<div class="inp d-flex justify-content-center" style="width: 100%;">
-					<input class="input" type="passworld" name="pwd" placeholder="请输入用密码">
+					<input class="input" v-model="passworld" type="password" name="pwd" id="passworld" placeholder="请输入用密码">
 				</div>
 				<div class="inp d-flex justify-content-center">
 					<input type="text" class="verification" style="padding-left: 7px; margin-right: 3px">
@@ -29,15 +29,41 @@ import $ from 'jquery';
 	export default{
 		data(){
 			return {
+				username: '',
+				passworld: '',
+				userinfo: [],
+				log: false
 			}
 		},
 		methods: {
 			login(){
-				 this.$router.push('/home');
+				let vm = this;
+				vm.userinfo.forEach(function(e){
+					if(e.username == vm.username && e.passworld == vm.passworld){
+						vm.$router.push('/home');
+						vm.$store.commit('recordUserinfo', e);
+						vm.log = true;
+					}
+				});
+				if(vm.log == false){
+					alert("账号或密码错误");
+				}
 			}
 		},
 		mounted () {
-			this.$events.emit('hello' , {id:1})
+			let vm = this;
+			$.ajax({
+				method: 'POST',
+				url: '/login',
+				dataType: 'json',
+				async: true,
+				success: function(res){
+					vm.userinfo = res;
+				},
+				error: function(err){
+					console.log(err)
+				}
+			})
 		}
 	}
 </script>

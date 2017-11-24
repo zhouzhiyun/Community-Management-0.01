@@ -89,7 +89,6 @@
                 fontWeight: "800"
 			});
 			label.addEventListener('click',function(){
-				console.log(that.isShow)
 				that.$store.commit('changeVal',{text:e.text})
 			})
 			map.addOverlay(label);
@@ -136,6 +135,7 @@
 			axios.get('data/index.json')
             .then(function (res) {
 				map.addEventListener('tilesloaded',function(){
+                    map.setMinZoom(15);
 					map.clearOverlays();
 					createRingOverlay(res.data.ringcover, map);
 					if(map.getZoom() < 18){
@@ -166,3 +166,6 @@
 	height: 100%;
 }
 </style>
+
+
+// 星号：&#9734;     方块：&#9744;       对号：&#10004;   圆：&#927;   三角：&#916;

@@ -7,9 +7,13 @@
 		<my-search></my-search>
 		<my-details v-if="this.$store.state.detailsShow"></my-details>
         <recorded></recorded>
+<<<<<<< HEAD
         <message></message>
         <event-handing></event-handing>
         
+=======
+        <user-manage v-if="this.$store.state.usermanage"></user-manage>
+>>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 	</div>
 </template>
 
@@ -20,8 +24,14 @@
 	import myDetails from '../components/details.vue';
 	import buildingDeatils from "../components/bdetails.vue";
     import recorded from '../components/recorded.vue';
+<<<<<<< HEAD
     import eventHanding from '../components/eventHandling.vue';
     import message from '../components/message.vue';
+=======
+    import Highcharts from 'highcharts';
+    import userManage from "../components/usermanagement.vue";
+
+>>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 	// 添加环形遮罩层
 	function createRingOverlay (corver, map){
         // 添加环形遮罩层
@@ -80,7 +90,10 @@
        
         building.forEach(function(e) {
             var point = new BMap.Point(e.lng, e.lat)
-            var opts = {
+            if(e.text == "15#" || e.text == "16#" || e.text == "17#" || e.text == "18#"){
+                creatPie(point , that , e.text, map);
+            }else{
+                var opts = {
                 position : point,   // 指定文本标注所在的地理位置
                 offset: new BMap.Size(-10, -10)
             }
@@ -96,31 +109,94 @@
                 fontWeight: "800"
 			});
 			label.addEventListener('click',function(){
-				that.$store.commit('changeVal',{text:e.text})
+                that.$store.commit('changeVal',{text:e.text});
+                that.$store.commit('getData')
 			})
 			map.addOverlay(label);
-            if(e.unit.length > 0){
-                e.unit.forEach(function(el, i){
-                    var points = new BMap.Point(el.lng, el.lat);
-                    var opt = {
-                        position : points,   // 指定文本标注所在的地理位置
-                        offset: new BMap.Size(-20, -10)
-                    };
-                    var labels = new BMap.Label(el.text, opt);  // 创建文本标注对象
-                    labels.setStyle({
-                        color : "yellow",
-                        fontSize : "12px",
-                        height : "16px",
-                        lineHeight : "16px",
-                        fontFamily:"微软雅黑",
-                        border: "none",
-                        backgroundColor: "rgba(0,0,0,0)"
-                    });
-                    map.addOverlay(labels);
-                })
             }
+            
         });
     }
+
+    // 添加覆盖物
+
+    function creatPie (point , that , text , map){
+        function CommunityOverlay(point, width){
+            this._center = point;
+            this._width = width;
+        }
+
+        CommunityOverlay.prototype = new BMap.Overlay();
+        
+        CommunityOverlay.prototype.initialize = function(){
+            this._map = map;
+            var div = document.createElement("div");  
+            div.style.position = "absolute";
+            div.style.width = this._width + "px";  
+            div.style.height = this._width + "px";
+            div.style.background = "transparent";
+            map.getPanes().markerPane.appendChild(div);
+            Highcharts.chart(div,{
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    backgroundColor: 'rgba(0,0,0,0)'
+                },
+                credits:{
+                    enabled: false // 禁用版权信息
+                },
+                title: {
+                    text: ''
+                },
+                tooltip: {
+                    headerFormat: '{series.name}br',
+                    pointFormat: ''
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: false,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                            format: 'b{point.name}b {point.percentage.1f} %',
+                            style: {
+                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                            }
+                        }
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: '浏览器访问量占比',
+                    data: [
+                        ['Firefox',   45.0],
+                        ['IE',       26.8],
+                        ['Safari',    8.5],
+                        ['Opera',     6.2]
+                    ]
+                }]
+            })
+
+            div.addEventListener('click',function(){
+                that.$store.commit('changeVal',{text: text});
+                that.$store.commit('getData');
+            })
+
+            this._div = div;
+            return div;
+        }
+        CommunityOverlay.prototype.draw = function(){
+            var position = this._map.pointToOverlayPixel(this._center);
+            this._div.style.left = position.x - this._width / 2 + "px";  
+            this._div.style.top = position.y - this._width / 2 + "px";
+        }
+        var mySquare = new CommunityOverlay(point, 80);  
+        
+        map.addOverlay(mySquare);
+        
+    }
+
 	export default{
 		data(){
 			return {
@@ -163,8 +239,12 @@
 			mySearch,
 			myDetails,
             recorded,
+<<<<<<< HEAD
             eventHanding,
             message
+=======
+            userManage
+>>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
 		}
 	}
 	

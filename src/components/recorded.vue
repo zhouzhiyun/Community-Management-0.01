@@ -413,8 +413,11 @@
             });            
             axios.post('/getDB').then(function(req){
                 vm.db=req.data;
+<<<<<<< HEAD
                 // console.log('-------------------------');
                 // console.log(req.data);
+=======
+>>>>>>> 17e6afb0fd203cf00f56c3f425e7b1ada48183e2
             }).catch(function (error) {
                 console.log(error);
             });

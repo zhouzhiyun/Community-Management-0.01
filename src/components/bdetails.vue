@@ -2,13 +2,13 @@
     <div>
         <div id="detail" class="modal-content position-absolute" >
             <div class="modal-header">
-                <h5 class="modal-title">楼层走访统计图（<span>{{ this.$store.state.building }}&nbsp;&nbsp;合计：<span v-text="buildings.length"></span></span>户）</h5>
+                <h5 class="modal-title">楼层走访统计图（<span>{{ this.$store.state.buildingId }}栋&nbsp;&nbsp;合计：<span v-text="this.$store.state.house.length"></span></span>户）</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" @click="close">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="lists" >
-                <div class="list" v-for="room in buildings">
+                <div class="list" v-for="room in this.$store.state.house">
                     <span class="text" style="cursor: pointer;" @click="edit(room)">{{ room.roomInfo.roomId }}</span>
                     <span class="text">
                         <span v-for="type in room.roomInfo.type" v-html="type"></span>
@@ -27,8 +27,7 @@ export default {
     
   data(){
       return {
-         rooms: '',
-         buildings: [],
+         rooms: '' 
       }
   },
   methods: {
@@ -38,38 +37,7 @@ export default {
       edit(room){
           this.$store.commit('changeRoomNum', room)
       }
-  },
-  mounted(){
-        var vm = this;
-        let build = vm.$store.state.building;
-        axios.get('data/info.json')
-        .then(function(res){
-            vm.rooms = res.data;
-            vm.rooms.forEach(function(e){
-                let buildNum = e.roomInfo.building + "#";
-                if(buildNum == build){
-                    vm.buildings.push(e)
-                }
-            });
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-    },
-    beforeUpdate () {
-        let vm = this;
-        vm.buildings = [];
-        let build = vm.$store.state.building;
-        vm.rooms.forEach(function(e){
-            let buildNum = e.roomInfo.building + "#";
-            if(buildNum == build){
-               vm.buildings.push(e);
-            }
-        });
-    },
-    beforeCreate(){
-
-    }
+  }
 }
 </script>
 <style scoped>

@@ -54,7 +54,7 @@ import $ from 'jquery';
 			let vm = this;
 			$.ajax({
 				method: 'POST',
-				url: '/login',
+				url: '/getUserInfo',
 				dataType: 'json',
 				async: true,
 				success: function(res){

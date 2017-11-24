@@ -417,8 +417,6 @@
             });            
             axios.post('/getDB').then(function(req){
                 vm.db=req.data;
-                console.log('-------------------------');
-                console.log(req.data);
             }).catch(function (error) {
                 console.log(error);
             });

@@ -13,7 +13,10 @@ const store = new Vuex.Store({
        tenants: [],
        permissions: '', // 权限等级
        modify: '', //  允许修改
-       username: '' // 用户名
+       username: '' ,// 用户名
+       house: [],
+       buildingId: '',
+       usermanage: false
     },
 	mutations:{
         changeVal(state, payload){
@@ -39,6 +42,26 @@ const store = new Vuex.Store({
             state.modify = payload.modify;
             state.username = payload.name;
             console.log(payload)
+        },
+        getData(state){
+            state.house = [];
+            axios.get('data/info.json')
+            .then(function(res){
+                let antrums = res.data;
+                antrums.forEach(element => {
+                    if(state.building == element.roomInfo.building + "#"){
+                        state.buildingId = element.roomInfo.building
+                        state.house.push(element)
+                    }
+                });
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+            
+        },
+        usermanageShow(state){
+            state.usermanage = true;
         }
     }
 });

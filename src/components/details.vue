@@ -315,7 +315,6 @@
 							
 						break;
 					case "6":
-					console.log(vm.$store.state.building)
 						if(vm.$store.state.building == "15#" || vm.$store.state.building == "16#" || vm.$store.state.building == "17#" || vm.$store.state.building == "18#"){
 							vm.houseOwnerEdit = true;
 						}else{
@@ -360,7 +359,6 @@
 						vm.json[i] = e
 					}
 				});
-				console.log(vm.json)
 				$.ajax({
 					method: 'POST',
 					url: '/home',

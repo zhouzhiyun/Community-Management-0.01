@@ -37,7 +37,7 @@
                     <span>行政事务</span>
                 </a>
             </li>
-            <li class="nav-item ">
+            <li class="nav-item" @click="userManageShow">
                 <a class="nav-link text-white" href="#">
                     <i class="material-icons">&#xE851;</i>
                     <span>用户管理</span>
@@ -67,6 +67,9 @@
             },
             recorded(){
                 this.$events.emit('recorded',true);
+            },
+            userManageShow(){
+                this.$store.commit('usermanageShow')
             }
 		},
 		mounted(){		

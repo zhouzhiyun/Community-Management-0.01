@@ -93,7 +93,7 @@ app.post('/getString',function(req,res){
      })
  });
 
- app.post('/login',function(req,res){
+ app.post('/getUserInfo',function(req,res){
      fs.open('./src/data/userinfo.json','r+',function(err,fd){
          if(err){
              console.log(err)

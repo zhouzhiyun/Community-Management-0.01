@@ -5,11 +5,7 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-<<<<<<< HEAD
-						<th scope="col" :style="{'background-color':this.$store.state.bgcolor}">{{houseObj.roomID}}</th>
-=======
 						<th scope="col">{{ this.$store.state.roomInfo.roomId }}</th>
->>>>>>> pei
 						<th scope="col">房主姓名</th>
 						<th scope="col">{{ this.$store.state.owner.name }}</th>
 						<th scope="col">联系电话</th>
@@ -24,21 +20,12 @@
 					</tr>
 				</thead>
 				<tbody>
-<<<<<<< HEAD
-					<tr @contextmenu.prevent="menu($event)" v-for="(room,index) in roomObj">
-						<td scope="row">{{index+1}}.{{room.roomerName}}</td>
-						<td colspan="2">{{room.IDCard}}</td>
-						<td>{{room.rommerNumber}}</td>
-						<td>{{room.closeingDate}}</td>
-						<td>{{houseObj.room[0].recorder}}</td>
-=======
 					<tr v-for="tenant in this.$store.state.tenants[0].tenantInfo">
 						<td scope="row">{{ tenant.name }}</td>
 						<td colspan="2">{{ tenant.IDcard }}</td>
 						<td>{{ tenant.phone }}</td>
 						<td>无</td>
 						<td v-text="recorder"></td>
->>>>>>> pei
 					</tr>
 					
 				</tbody>
@@ -89,12 +76,6 @@
 		</div>
 		
 		<!--房主编辑-->
-<<<<<<< HEAD
-		<div class="card" v-if="houseOwnerEdit" style="width:300px;height:250px;position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;">
-			<div class="card-body">
-				<h5>房主信息</h5>
-				
-=======
 		<div class="card" id="household" v-if="houseOwnerEdit" style="width:340px; height:450px; position:absolute;left: 0;top:0; right: 0; margin: auto;">
 			<div class="d-flex justify-content-around">
 				<div @click="ownerEdit" class="btn btn-secondary" role="button">房主编辑</div>
@@ -249,13 +230,6 @@
 						<button type="button" class="btn btn-primary btn-sm" @click="save">保存</button>
 					</div>
 				</div>
->>>>>>> pei
-			</div>			
-		</div>
-		<div class="card" v-if="roomerEdit" style="width:300px;min-height:250px;position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;">
-			<div class="card-body">
-				<h5>房客信息</h5>
-				
 			</div>			
 		</div>
 	</div>
@@ -274,12 +248,6 @@
 				tip:false,
 				menuShow:false,
 				houseOwnerEdit:false,
-<<<<<<< HEAD
-				roomerEdit:false,
-				houseObj:{},
-				roomObj:{},
-				index:0
-=======
 				recorder: this.$store.state.tenants[0].recorder,
 				ownerShow: true,
 				tenter: false,
@@ -288,7 +256,6 @@
 				text: 'owner',
 				index: '',
 				json: []
->>>>>>> pei
 			}
 		},
 		methods: {
@@ -309,34 +276,6 @@
 						top:top-pos.top
 					});
 				}
-<<<<<<< HEAD
-				this.menuShow=true;
-			},	
-
-			previous(){
-				var vm=this;
-				if(vm.index<vm.houseObj.room.length-1){
-					vm.index++;
-					vm.roomObj=vm.houseObj.room[vm.index].roomers;
-				}
-			},
-			next(){
-				var vm=this;
-				if(vm.index>0){
-					vm.index--;
-					vm.roomObj=vm.houseObj.room[vm.index].roomers;
-				}
-			},
-			first(){
-				var vm=this;
-				vm.index=vm.houseObj.room.length-1;
-				vm.roomObj=vm.houseObj.room[vm.index].roomers;
-			},
-			last(){
-				var vm=this;
-				vm.index=0;
-				vm.roomObj=vm.houseObj.room[vm.index].roomers;
-=======
 				this.menuShow = true;
 			},
 			detEdit(){
@@ -391,7 +330,6 @@
 						break;
 				}
 				
->>>>>>> pei
 			},
 			cancel(){
 				this.houseOwnerEdit = false;
@@ -437,24 +375,6 @@
 				})
 			},
 			goback(){
-<<<<<<< HEAD
-				this.$store.commit('changeDetailsShow');
-			}
-		},
-		mounted(){			
-			var vm=this;
-			axios.get('data/house.json').then(function(res){			
-				var texts=vm.$store.state.text.split('#')[0];
-				var number=vm.$store.state.roomNumber;
-				for(var i=0;i<res.data.length;i++){
-					if(res.data[i].building==texts){
-						for(var j=0;j<res.data[i].rooms.length;j++){					
-							if(res.data[i].rooms[j].roomID==number){
-								vm.houseObj=res.data[i].rooms[j];
-								vm.roomObj=vm.houseObj.room[0].roomers;
-							}
-						}
-=======
 				this.$store.commit('changeDetailsShow')
 			},
 			ownerEdit(){
@@ -469,6 +389,18 @@
 				this.index = index;
 				let tenants = this.$store.state.tenants[0].tenantInfo[index];
 				this.tenant = tenants;
+			},
+			first(){
+
+			},
+			last(){
+
+			},
+			next(){
+
+			},
+			previous(){
+
 			}
 		},
 		mounted(){
@@ -484,7 +416,6 @@
 					},
 					error: function(err){
 						console.log(err)
->>>>>>> pei
 					}
 				})
 		},

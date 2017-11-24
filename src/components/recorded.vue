@@ -351,9 +351,11 @@
                 //保存所有录入信息
                 vm.disp=false;
                 for(var i in vm.db){
+                    console.log(vm.houseInfo.building+"--"+ vm.db[i].roomInfo.building);
+                    console.log(vm.houseInfo.roomNumber+"--"+ vm.db[i].roomInfo.roomNumber);
                     if(vm.houseInfo.building == vm.db[i].roomInfo.building && 
                     vm.houseInfo.roomNumber == vm.db[i].roomInfo.roomNumber ){
-                        vm.db[i].tenants[0].concat(vm.tenantArr);
+                        vm.db[i].tenants[0].tenantInfo.concat(vm.tenantArr);
                         flag=false;
                     }
                 }

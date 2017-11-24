@@ -7,34 +7,30 @@ const axios = require('axios');
 app.use(express.static('dist'));
 app.use(express.static('src'));
 
-<<<<<<< HEAD
 
-app.use(bodyParser.json({limit:'100mb'}));
-
-
-app.post('/home',function(req,res){
-
-=======
 app.use(bodyParser.json({limit:'100mb'}));
 
 app.post('/home',function(req,res){
    let json = req.body;
    console.log(req.body);
->>>>>>> pei
     fs.open('./src/data/info.json','r+',function(err,fd){
         if(err){
             console.log(err)
         }else{
-<<<<<<< HEAD
-            fs.readFile('./src/data/info.json', function (err, data) {
-                if (err) {
-                    return console.error(err);
-                }else {
-                    
+            fs.writeFile('./src/data/info.json', JSON.stringify(json), function(err){
+                if(err){
+                    console.log(err)
+                }else{
+                    fs.close(fd, function(err){
+                        if (err){
+                            console.log(err);
+                        } 
+                        });
                 }
-                res.send(data.toString())
-             });
+                
+            })
         }
+        
     })
 });
 
@@ -70,23 +66,10 @@ app.post('/entering', function(req,res){
     });
 
 });
-=======
             
-            fs.writeFile('./src/data/info.json', JSON.stringify(json), function(err){
-                if(err){
-                    console.log(err)
-                }else{
-                    fs.close(fd, function(err){
-                        if (err){
-                            console.log(err);
-                        } 
-                        });
-                }
-                
-            })
-        }
-    })
-});
+            
+        
+
 
 
 app.post('/getString',function(req,res){
@@ -102,7 +85,6 @@ app.post('/getString',function(req,res){
                      res.send(data.toString())
                      fs.close(fd,function(err){
                          if(err) console.log(err);
-                         console.log("文件关闭成功");
                      })
                  }
                  
@@ -118,13 +100,14 @@ app.post('/getString',function(req,res){
          }else{
              fs.readFile('./src/data/userinfo.json', function (err, data) {
                  if (err) return console.error(err);
-                 
                  res.send(data.toString())
+                 fs.close(fd,function(err){
+                    if(err) console.log(err);
+                })
               });
          }
      })
  });
->>>>>>> pei
 
 
 app.listen(80, function(){

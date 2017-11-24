@@ -5,7 +5,7 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th scope="col">{{houseObj.roomID}}</th>
+						<th scope="col" :style="{'background-color':this.$store.state.bgcolor}">{{houseObj.roomID}}</th>
 						<th scope="col">房主姓名</th>
 						<th scope="col">{{houseObj.homeOwner.name}}</th>
 						<th scope="col">联系电话</th>
@@ -20,7 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr @contextmenu.prevent="menu($event)" v-for="(room,index) in houseObj.room[0].roomers">
+					<tr @contextmenu.prevent="menu($event)" v-for="(room,index) in roomObj">
 						<td scope="row">{{index+1}}.{{room.roomerName}}</td>
 						<td colspan="2">{{room.IDCard}}</td>
 						<td>{{room.rommerNumber}}</td>
@@ -31,29 +31,32 @@
 				</tbody>
 			</table>
 			<div class="card-footer bg-transparent">
-				<small class="text-muted"><span>△□☆</span></small>	
+				<small class="text-muted">
+					<span class="symbol" v-for="mark in this.$store.state.mark" v-html="mark">
+					</span>
+				</small>	
 				<button type="button" class="btn btn-secondary float-right btn-sm mx-2" @click="goback">返回</button>			
 				<ul class="pagination float-right" style="margin:0;padding:0;">
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link" aria-label="First" @click="first">
 							<span aria-hidden="true" class="material-icons">&#xE5DC;</span>
 							<span class="sr-only">First</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link"  @click="previous" aria-label="Previous">
 							<span aria-hidden="true" class="material-icons">&#xE314;</span>
 							<span class="sr-only">Previous</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link" @click="next($event)" aria-label="Previous">
 							<span aria-hidden="true" class="material-icons">&#xE315;</span>
 							<span class="sr-only">Next</span>
 						</a>
 					</li>
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link" aria-label="Last" @click="last">
 							<span aria-hidden="true" class="material-icons">&#xE5DD;</span>
 							<span class="sr-only">Last</span>
 						</a>
@@ -78,9 +81,15 @@
 		</div>
 		
 		<!--房主编辑-->
-		<div class="card" v-show="houseOwnerEdit" style="width:300px;height:250px;position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;">
+		<div class="card" v-if="houseOwnerEdit" style="width:300px;height:250px;position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;">
 			<div class="card-body">
 				<h5>房主信息</h5>
+				
+			</div>			
+		</div>
+		<div class="card" v-if="roomerEdit" style="width:300px;min-height:250px;position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;">
+			<div class="card-body">
+				<h5>房客信息</h5>
 				
 			</div>			
 		</div>
@@ -97,9 +106,12 @@
 			return {
 				disp:false,
 				tip:false,
-				menuShow:false,				
+				menuShow:false,
 				houseOwnerEdit:false,
-				houseObj:{}
+				roomerEdit:false,
+				houseObj:{},
+				roomObj:{},
+				index:0
 			}
 		},
 		methods: {
@@ -121,35 +133,50 @@
 					});
 				}
 				this.menuShow=true;
+			},	
+
+			previous(){
+				var vm=this;
+				if(vm.index<vm.houseObj.room.length-1){
+					vm.index++;
+					vm.roomObj=vm.houseObj.room[vm.index].roomers;
+				}
 			},
-			
-			getDB(){
-				
+			next(){
+				var vm=this;
+				if(vm.index>0){
+					vm.index--;
+					vm.roomObj=vm.houseObj.room[vm.index].roomers;
+				}
+			},
+			first(){
+				var vm=this;
+				vm.index=vm.houseObj.room.length-1;
+				vm.roomObj=vm.houseObj.room[vm.index].roomers;
+			},
+			last(){
+				var vm=this;
+				vm.index=0;
+				vm.roomObj=vm.houseObj.room[vm.index].roomers;
 			},
 			save(){
 				
 			},
 			goback(){
-				this.$store.commit('changeDetailsShow')
+				this.$store.commit('changeDetailsShow');
 			}
 		},
-		mounted(){
-			
+		mounted(){			
 			var vm=this;
-			axios.get('data/house.json').then(function(res){
-			
-				
+			axios.get('data/house.json').then(function(res){			
 				var texts=vm.$store.state.text.split('#')[0];
 				var number=vm.$store.state.roomNumber;
-				console.log(number);
 				for(var i=0;i<res.data.length;i++){
 					if(res.data[i].building==texts){
-						for(var j=0;j<res.data[i].rooms.length;j++){	
-					
+						for(var j=0;j<res.data[i].rooms.length;j++){					
 							if(res.data[i].rooms[j].roomID==number){
-								console.log(res.data[i].rooms[j]);
 								vm.houseObj=res.data[i].rooms[j];
-								console.log(vm.houseObj);
+								vm.roomObj=vm.houseObj.room[0].roomers;
 							}
 						}
 					}

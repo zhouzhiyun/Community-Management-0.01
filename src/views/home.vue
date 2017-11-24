@@ -6,6 +6,7 @@
         <my-sidebar></my-sidebar>
 		<my-search></my-search>
 		<my-details v-if="this.$store.state.detailsShow"></my-details>
+        <recorded></recorded>
 	</div>
 </template>
 
@@ -15,6 +16,7 @@
 	import mySearch from '../components/search.vue';
 	import myDetails from '../components/details.vue';
 	import buildingDeatils from "../components/bdetails.vue";
+    import recorded from '../components/recorded.vue';
 	// 添加环形遮罩层
 	function createRingOverlay (corver, map){
         // 添加环形遮罩层
@@ -154,7 +156,8 @@
             buildingDeatils,
             mySidebar,
 			mySearch,
-			myDetails
+			myDetails,
+            recorded
 		}
 	}
 	

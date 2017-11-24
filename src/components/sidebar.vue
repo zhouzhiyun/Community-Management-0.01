@@ -7,11 +7,11 @@
         </nav>
                 
         <ul class="navbar-nav flex-column navbar-dark bg-dark">
-            <li class="nav-item active">
-                <a class="nav-link text-white" href="#">
+            <li class="nav-item active ">
+                <a class="nav-link text-white" href="javascript:void(0)" @click="recorded" >
                     <i class="material-icons">&#xE254;</i>
                     <span>信息录入</span>
-                </a>
+                </a>                
             </li>
             <li class="nav-item ">
                 <a class="nav-link text-white" href="#">
@@ -63,8 +63,10 @@
                     this.flag=false;
                 }else{
                     this.flag=true;
-                }
-                
+                }                
+            },
+            recorded(){
+                this.$events.emit('recorded',true);
             }
 		},
 		mounted(){		

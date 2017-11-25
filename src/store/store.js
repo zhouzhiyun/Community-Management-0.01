@@ -14,10 +14,11 @@ const store = new Vuex.Store({
        permissions: '', // 权限等级
        modify: '', //  允许修改
        username: '', // 用户名
-
        house: [],
        buildingId: '',
-       usermanage: false
+       usermanage: false, // 用户管理
+       eventHand: false, //  事件处理
+       record:false  // 信息录入
     },
 	mutations:{
         changeVal(state, payload){
@@ -61,8 +62,33 @@ const store = new Vuex.Store({
             })
             
         },
+
         usermanageShow(state){
-            state.usermanage = true;
+            if(state.usermanage){
+                state.usermanage = false;
+            }else{
+                state.usermanage = true;
+                state.eventHand = false;
+                state.record = false;
+            }
+        },
+        eventHandHide(state){
+            if(state.eventHand){
+                state.eventHand = false;
+            }else{
+                state.usermanage = false;
+                state.eventHand = true;
+                state.record = false;
+            }
+        },
+        recordHide(state){
+            if(state.record){
+                state.record = false;
+            }else{
+                state.usermanage = false;
+                state.eventHand = false;
+                state.record = true;
+            }
         }
     }
 });

@@ -1,7 +1,13 @@
 <template>
   <div>
       <div class="card position-absolute" style="width:800px; height:500px; margin:auto;top:0;right:30px;bottom:0;overflow-y: scroll;">
-            <table class="table">
+            <div>
+                <h5  style="text-align:center;padding-top: 20px;">用户管理</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="position: absolute;top: 5px;right: 10px;">
+                    <span aria-hidden="true" @click="close">&times;</span>
+                </button>
+            </div>
+            <table class="table" style="margin-top:">
                 <thead>
                     <tr>
                     <th scope="col">姓名</th>
@@ -25,7 +31,7 @@
                             </select>
                         </td>
                         <td class="d-flex flex-row">
-                            <el-select v-model="area" class="area" disabled multiple placeholder="请选择">
+                            <el-select v-model="info.area" disabled class="area" multiple placeholder="请选择">
                                 <el-option
                                 v-for="item in options"
                                 :key="item.value"
@@ -44,7 +50,11 @@
                     </tr>
                 </tbody>
             </table>
+
+
+                
       </div>
+    
   </div>
 </template>
 <script>
@@ -53,80 +63,42 @@ export default {
   data(){
       return {
           userInfo: [],
-          options: [
-              {
-                  value: "1",
-                  label: "全部区域"
-              },{
-                  value: "2",
-                  label: "1#"
-              },{
-                  value: "3",
-                  label: "2#"
-              },{
-                  value: "4",
-                  label: "3#"
-              },{
-                  value: "5",
-                  label: "4#"
-              },{
-                  value: "6",
-                  label: "5#"
-              },{
-                  value: "7",
-                  label: "6#"
-              },{
-                  value: "8",
-                  label: "7#"
-              },{
-                  value: "9",
-                  label: "8#"
-              },{
-                  value: "10",
-                  label: "9#"
-              },{
-                  value: "11",
-                  label: "10#"
-              },{
-                  value: "12",
-                  label: "11#"
-              },{
-                  value: "13",
-                  label: "12#"
-              },{
-                  value: "14",
-                  label: "13#"
-              },{
-                  value: "15",
-                  label: "14#"
-              },{
-                  value: "16",
-                  label: "15#"
-              },{
-                  value: "17",
-                  label: "16#"
-              },{
-                  value: "18",
-                  label: "17#"
-              },{
-                  value: "19",
-                  label: "18#"
-              },
-          ],
-          area:[]
+          options:[
+              {label:"整个社区",value:"0"},
+              {label:"一栋",value:"1"},
+              {label:"二栋",value:"2"},
+              {label:"三栋",value:"3"},
+              {label:"四栋",value:"4"},
+              {label:"五栋",value:"5"},
+              {label:"六栋",value:"6"},
+              {label:"七栋",value:"7"},
+              {label:"八栋",value:"8"},
+              {label:"九栋",value:"9"},
+              {label:"十栋",value:"10"},
+              {label:"十一栋",value:"11"},
+              {label:"十二栋",value:"12"},
+              {label:"十三栋",value:"13"},
+              {label:"十四栋",value:"14"},
+              {label:"十五栋",value:"15"},
+              {label:"十六栋",value:"16"},
+              {label:"十七栋",value:"17"},
+              {label:"十八栋",value:"18"}
+          ]
       }
   },
   methods: {
       edit(index){
-          $('.editInfo').eq(index).children('td').children('input').attr({readonly: false})
-          $('.editInfo').eq(index).children('td').children('select').attr({disabled: false})
-          $('.area').eq(index).children('div').children('input').removeAttr("disabled");
+          $('.editInfo').eq(index).children('td').children('input').attr({readonly: false});
+          $('.editInfo').eq(index).children('td').children('select').attr({disabled: false});
+          $('.area').eq(index).children('div').children('input').removeAttr("disabled")
       },
       save(index){
           $('.editInfo').eq(index).children('td').children('input').attr({readonly: true})
           $('.editInfo').eq(index).children('td').children('select').attr({disabled: true})
-          $('.area').eq(index).children('div').children('input').attr({disabled:"true"});
-          
+          $('.area').eq(index).children('div').children('input').attr({disabled: "true"})
+      },
+      close(){
+          this.$store.commit('usermanageShow');
       }
   },
   mounted () {
@@ -138,7 +110,6 @@ export default {
         async: true,
         success: function(res){
             vm.userInfo = res;
-            console.log(res)
         },
         error: function(err){
             console.log(err)

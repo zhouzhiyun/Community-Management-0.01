@@ -6,10 +6,16 @@
             <span class="rounded-circle dotted bg-danger" v-if="visitedArr.length>=1"></span>                     
         </div>
         <div class="card card-2" v-if="flag">
-            <div v-if="visitedArr.length==0">暂无消息</div>
+            <div v-if="visitedArr.length==0 && events.length==0">暂无消息</div>
             <ul class="list-group list-group-flush" v-else>
-                <li class="list-group-item">
+                <li class="list-group-item" v-if="visitedArr.length!=0">
                     今天是探访独居老人的日子，请及时到访！
+                </li>
+                <li class="list-group-item"  v-if="events!=0">
+                    有偷盗案件，请及时解决
+                </li>
+                <li class="list-group-item" v-if="visitedArr.length!=0">
+                    有租客出租到期，请及时处理
                 </li>
                 
             </ul>
@@ -19,12 +25,14 @@
 </template>
 
 <script>
-
+    import axios from 'axios';
 	export default {
 		data(){
 			return {
                 visitedArr:[],
-                flag:false
+                flag:false,
+                events:[]
+
 				
 			}
 		},
@@ -40,12 +48,18 @@
 		mounted() {
             let vm=this;
             vm.$events.on('visited',function(val){
-                console.log('------------visited--------');
                 for(var i in val){
                     if(!val[i].visited){
                         vm.visitedArr.push(val[i]);
                     }
                 }
+            });
+            axios.post('/events').then(function(req){
+                 vm.events=req.data.event;
+                console.log('--------events==============');
+                console.log(vm.events);
+            }).catch(function (error) {
+                console.log(error);
             });
 			
 		 }

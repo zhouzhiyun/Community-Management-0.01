@@ -36,7 +36,7 @@
                     </div>
                     <div>
                         <label>房号</label>
-                        <input class="recordForm" type="text" v-model="houseInfo.roomNumber">
+                        <input class="recordForm" type="text" v-model="houseInfo.roomId">
                     </div>
                     <div>
                         <label>房屋状态</label>
@@ -264,7 +264,7 @@
                     village:"燕升园",
                     building:"",
                     unit:"",
-                    roomNumber:"",
+                    roomId:"",
                     type:""
                 },
                 ownerInfo:{//房主
@@ -309,7 +309,7 @@
                     village:"燕升园",
                     building:"",
                     unit:"",
-                    roomNumber:"",
+                    roomId:"",
                     type:""
                 };
                 this.ownerInfo={//房主
@@ -353,7 +353,7 @@
                 vm.disp=false;
                 for(var i in vm.db){
                     if(vm.houseInfo.building == vm.db[i].roomInfo.building && 
-                    vm.houseInfo.roomNumber == vm.db[i].roomInfo.roomId ){
+                    vm.houseInfo.roomId == vm.db[i].roomInfo.roomId ){
                        // vm.db[i].tenants[0].tenantInfo.concat(vm.tenantArr);
                         for(var j in vm.tenantArr){
                              vm.db[i].tenants[0].tenantInfo.push(vm.tenantArr[j]);

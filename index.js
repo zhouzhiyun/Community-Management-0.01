@@ -67,7 +67,46 @@ app.post('/entering', function(req,res){
 
 });
             
-            
+app.post('/events',function(req,res){
+    fs.open('./src/data/events.json','r+',function(err,fd){
+        if(err){
+            console.log(err);
+        }else{
+            fs.readFile('./src/data/events.json', function (err, data) {
+                if (err) {
+                    return console.error(err);
+                }else {
+                    res.send(data.toString());
+                    fs.close(fd,function(err){
+                        if(err) console.log(err);
+                    })
+                }
+                
+             });
+        }
+    })
+});   
+
+app.post('/saveEvent',function(req,res){
+    var data=req.body;
+    fs.open('./src/data/events.json','r+',function(err,fd){
+        if(err){
+            console.log(err);
+        }else{
+            fs.writeFile('./src/data/events.json', JSON.stringify({event:data}),function (err) {
+                if (err) {
+                    return console.error(err);
+                }else {
+                    
+                    fs.close(fd,function(err){
+                        if(err) console.log(err);
+                    })
+                }
+                
+             });
+        }
+    })
+});   
         
 
 

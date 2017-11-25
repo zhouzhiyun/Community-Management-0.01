@@ -4,62 +4,71 @@
         "passworld": "123456",
         "name": "王广辉",
         "permissions": "1",
-        "modify": "1"
+        "modify": "1",
+        "area": []
     },
     {
         "username": "dinghua",
         "passworld": "123456",
         "name": "丁晔",
         "permissions": "1",
-        "modify": "1"
+        "modify": "1",
+        "area": []
     },
     {
         "username": "fantian",
         "passworld": "123456",
         "name": "范甜",
         "permissions": "2",
-        "modify": "2"
+        "modify": "2",
+        "area": []
     },
     {
         "username": "wangjie",
         "passworld": "123456",
         "name": "王捷",
         "permissions": "2",
-        "modify": "3"
+        "modify": "3",
+        "area": []
     },
     {
         "username": "zhouxiangyi",
         "passworld": "123456",
         "name": "周相宜",
         "permissions": "2",
-        "modify": "4"
+        "modify": "4",
+        "area": []
     },
     {
         "username": "wangyao",
         "passworld": "123456",
         "name": "王瑶",
         "permissions": "2",
-        "modify": "5"
+        "modify": "5",
+        "area": []
     },
     {
         "username": "baixueqing",
         "passworld": "123456",
         "name": "白雪庆",
         "permissions": "2",
-        "modify": "6"
+        "modify": "6",
+        "area": []
     },
     {
         "username": "limengcheng",
         "passworld": "123456",
         "name": "李梦成",
         "permissions": "2",
-        "modify": "7"
+        "modify": "7",
+        "area": []
     },
     {
         "username": "lishuanglan",
         "passworld": "123456",
         "name": "励双兰",
         "permissions": "3",
-        "modify": "7"
+        "modify": "7",
+        "area": []
     }
 ]

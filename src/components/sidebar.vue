@@ -7,7 +7,7 @@
         </nav>
                 
         <ul class="navbar-nav flex-column navbar-dark bg-dark">
-            <li class="nav-item active ">
+            <li class="nav-item active " @click="recordShow">
                 <a class="nav-link text-white" href="javascript:void(0)" @click="recorded" >
                     <i class="material-icons">&#xE254;</i>
                     <span>信息录入</span>
@@ -19,7 +19,7 @@
                     <span>统计分析</span>
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" @click="eventHandShow">
                 <a class="nav-link text-white" href="#">
                     <i class="material-icons">&#xE8CF;</i>
                     <span>事件处理</span>
@@ -70,6 +70,12 @@
             },
             userManageShow(){
                 this.$store.commit('usermanageShow')
+            },
+            recordShow(){
+                this.$store.commit('recordHide')
+            },
+            eventHandShow(){
+                this.$store.commit('eventHandHide')
             }
 		},
 		mounted(){		

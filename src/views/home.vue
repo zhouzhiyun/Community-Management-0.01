@@ -6,10 +6,9 @@
         <my-sidebar></my-sidebar>
 		<my-search></my-search>
 		<my-details v-if="this.$store.state.detailsShow"></my-details>
-        <recorded></recorded>
+        <recorded v-if="this.$store.state.record"></recorded>
         <message></message>
-        <event-handing></event-handing>
-        
+        <event-handing v-if="this.$store.state.eventHand"></event-handing>
         <user-manage v-if="this.$store.state.usermanage"></user-manage>
 	</div>
 </template>
@@ -208,7 +207,11 @@
 			map.centerAndZoom(new BMap.Point(118.839323, 32.116994), 15);
 			map.enableScrollWheelZoom(true);
 			map.setCurrentCity("南京");
-
+            var bs = map.getBounds();   //获取可视区域
+            var bssw = bs.getSouthWest();   //可视区域左下角
+            var bsne = bs.getNorthEast();   //可视区域右上角
+            var b = new BMap.Bounds(new BMap.Point(bssw.lng, bssw.lat),new BMap.Point(bsne.lng, bsne.lat));
+            BMapLib.AreaRestriction.setBounds(map, b);
 			axios.get('data/index.json')
             .then(function (res) {
 				map.addEventListener('tilesloaded',function(){

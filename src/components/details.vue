@@ -64,8 +64,10 @@
 				</ul>
 			</div>
 		</div>
-		<div class="card" v-show="tip"
-		style="width:260px;min-height:200px;position: absolute;right: 600px;top: 0;">起始
+		<div class="card" v-if="tip"
+		style="width:260px;min-height:200px;position: absolute;right: 600px;top: 0;">
+			
+
 		</div>
 		<div class="card" style="width:150px;position: absolute;" v-show="menuShow" id="menu" ref="menu">
 			<div class="list-group list-group-flush">

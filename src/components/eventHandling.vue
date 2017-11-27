@@ -17,7 +17,7 @@
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="#contact" id="contact-tab" data-toggle="tab" role="tab" aria-controls="contact" aria-selected="false">案件登记</a>                            
                         <a class="dropdown-item" href="#" data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">案件处理</a>                            
-                        <a class="dropdown-item" href="#"  data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">案件统计</a>                            
+                        <a class="dropdown-item" href="#dataStatistics" id="data-statistics"  data-toggle="tab" role="tab" aria-controls="profile" aria-selected="false">案件统计</a>                            
                     </div>
                 </li>
             </ul>
@@ -34,8 +34,7 @@
                                     <th scope="col">身份证</th>
                                     
                                     <th scope="col">电话</th>
-                                    <th scope="col">出租截止日期</th>
-                                    
+                                    <th scope="col">出租截止日期</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,10 +88,10 @@
                                     <td>
                                         <div class="form-check form-check-inline">
                                             <label class="form-check-label">
-                                                <input class="form-check-input" type="radio" v-model="older.visited" value="true"> 是
+                                                <input class="form-check-input" type="radio" v-model="older.visited" @click="deal(index)" value="true"> 是
                                             </label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
+                                        </div>
+                                        <div class="form-check form-check-inline">
                                             <label class="form-check-label">
                                                 <input class="form-check-input" type="radio" v-model="older.visited" value="false"> 否
                                             </label>
@@ -172,6 +171,47 @@
                             </div>
                         </form>
                     </div>
+                    <div class="tab-pane fade" id="dataStatistics" role="tabpanel" aria-labelledby="data-statistics">
+                        <table class="table table-sm table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">案件登记号</th>
+                                    <th scope="col">楼栋</th>
+                                    <th scope="col">单元</th>
+                                    <th scope="col">房号</th>
+                                    <th scope="col">当事人</th>
+                                    <th scope="col">电话</th>
+                                    <th scope="col">事件内容</th>
+                                    <th scope="col">受理人</th>
+                                    <th scope="col">是否处理</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(events,index) in eventArr">
+                                    <td>{{events.number}}</td>
+                                    <td>{{events.building}}</td>
+                                    <td>{{events.unit}}</td>
+                                    <td>{{events.roomId}}</td>
+                                    <td>{{events.partyname}}</td>
+                                    <td>{{events.partynumber}}</td>
+                                    <td>{{events.content}}</td>
+                                    <td>{{events.resname}}</td>                                    
+                                    <td>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" v-model="events.deal"  value="true"> 是
+                                            </label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="radio" v-model="events.deal" value="false"> 否
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>                                
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div> 
             <div class="card-footer bg-transparent text-right">
@@ -243,11 +283,12 @@
                     roomId:"",
                     content:"",
                     date:"",
-                    partyname:"",
+                    partyname:"",//当事人
                     partynumber:"",
-                    reportname:"",
+                    reportname:"",//报告人
                     reportnumber:"",
-                    resname:""
+                    resname:"",//受理人,
+                    deal:false
                 },
                 eventArr:[]
                 
@@ -291,14 +332,18 @@
                     console.log(err);
                 });
                      
-            }        
+            },
+            deal(len){
+                let vm=this;
+                vm.olders.splice(len,1);
+                vm.$events.emit('delEvent',len);
+            }      
 			
 		},
         created(){
             
         },
 		mounted () {
-            console.log('e-----------------------------');
             var dt=new Date();
             var vm=this;
             vm.date=dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();
@@ -306,10 +351,9 @@
                 vm.olders[i].date=vm.date;
             }  
             
-            vm.$events.emit('visited',vm.date);
+            vm.$events.emit('visited',vm.olders);
             axios.post("/events").then(function(req){
-                vm.eventArr=req.data.event;
-                
+                vm.eventArr=JSON.parse(JSON.stringify(req.data.event)).event;                
             }).catch(function(err){
                 console.log(err);
             })

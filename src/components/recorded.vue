@@ -31,7 +31,8 @@
                     <div>
                         <label>单元</label>
                         <select class="recordForm" v-model="houseInfo.unit">
-                            <option value="一单元">一单元</option>
+                            <option value="1">一单元</option>
+                            <option value="2" v-if="houseInfo.building==17">二单元</option>
                         </select>
                     </div>
                     <div>
@@ -58,14 +59,17 @@
                         </div>
                         <div>
                             <label>性别</label>
-                            <input class="recordForm" type="text" v-model="ownerInfo.sex">
+                            <select class="recordForm" v-model="ownerInfo.sex">
+                                <option value="男">男</option>
+                                <option value="女">女</option>
+                            </select>                            
                         </div>
                         <div>
                             <label>民族</label>
                             <input class="recordForm" type="text" v-model="ownerInfo.nation">
                         </div>
                         <div>
-                            <label>户籍</label>
+                            <label>户籍地址</label>
                             <input class="recordForm" type="text" v-model="ownerInfo.household">
                         </div>
                         <div>
@@ -177,14 +181,17 @@
                     </div>
                     <div>
                         <label>性别</label>
-                        <input class="recordForm" type="text" v-model="tenant.sex">
+                        <select class="recordForm" v-model="tenant.sex">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select> 
                     </div>
                     <div>
                         <label>民族</label>
                         <input class="recordForm" type="text" v-model="tenant.nation">
                     </div>
                     <div>
-                        <label>户籍</label>
+                        <label>户籍地址</label>
                         <input class="recordForm" type="text" v-model="tenant.houseHold">
                     </div>
                     <div>

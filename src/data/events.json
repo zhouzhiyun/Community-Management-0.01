@@ -1,18 +1,33 @@
 {
-    "event":[
-        {
-            "number":"123456",
-            "village":"燕升园",
-            "building":"15",
-            "unit":"1",
-            "roomId":"201",
-            "content":"偷盗",
-            "date":"2017-11-11",
-            "partyname":"张三",
-            "partynumber":"12345678909",
-            "reportname":"李四",
-            "reportnumber":"12345678909",
-            "resname":"白雪庆"
-        }
-    ]
+    "event": {
+        "event": [{
+            "number": "123456",
+            "village": "燕升园",
+            "building": "15",
+            "unit": "1",
+            "roomId": "201",
+            "content": "偷盗",
+            "date": "2017-11-11",
+            "partyname": "张三",
+            "partynumber": "12345678909",
+            "reportname": "李四",
+            "reportnumber": "12345678909",
+            "resname": "白雪庆",
+            "deal": false
+        }, {
+            "number": "11111",
+            "village": "燕升园",
+            "building": "16",
+            "unit": "1",
+            "roomId": "308",
+            "content": "偷盗",
+            "date": "2017-11-12",
+            "partyname": "王芳",
+            "partynumber": "12345678909",
+            "reportname": "655",
+            "reportnumber": "555",
+            "resname": "55",
+            "deal": false
+        }]
+    }
 }

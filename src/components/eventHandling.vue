@@ -80,13 +80,9 @@
                                     <td>{{older.old}}</td>
                                     <td>{{older.phone}}</td>
                                     <td>
-<<<<<<< HEAD
                                         <el-date-picker
                                             v-model="older.date"
                                             type="date">
-=======
-                                        <el-date-picker  v-model="older.date" editable type="date">
->>>>>>> 3827ee3545cbe6739ed35814d7853418a4af19cd
                                         </el-date-picker>
                                     </td>
                                     <td>
@@ -107,7 +103,6 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-<<<<<<< HEAD
                         <form class="row">
                             <div class="col-6">
                                 <div>
@@ -216,9 +211,6 @@
                                 </tr>                                
                             </tbody>
                         </table>
-=======
-                       
->>>>>>> 3827ee3545cbe6739ed35814d7853418a4af19cd
                     </div>
                 </div>
             </div> 

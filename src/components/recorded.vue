@@ -1,6 +1,6 @@
 
 <template>
-<div id="recorded" v-if="disp">
+<div id="recorded">
 	<div class="card">
         <div class="card-body">
             <h6 class="card-title">房屋信息录入</h6>
@@ -258,7 +258,6 @@
 	export default {
 		data(){
 			return {
-                disp:false,
                 houseInfo:{//房屋
                     community:"山水园社区",
                     village:"燕升园",
@@ -350,7 +349,7 @@
                 let vm=this;
                 var flag=true;
                 //保存所有录入信息
-                vm.disp=false;
+                this.$store.commit('recordHide')
                 for(var i in vm.db){
                     if(vm.houseInfo.building == vm.db[i].roomInfo.building && 
                     vm.houseInfo.roomId == vm.db[i].roomInfo.roomId ){
@@ -382,7 +381,7 @@
             },
             cancel(){//取消
                 let vm=this;
-                vm.disp=false;
+                this.$store.commit('recordHide')
                 this.initHouse();
             },
             addTenant(){
@@ -407,10 +406,7 @@
            
 		},
 		mounted () {
-            let vm=this;
-            vm.$events.on('recorded',function(v){
-                vm.disp=true; 
-            });            
+            let vm=this;          
             axios.post('/getDB').then(function(req){
                 vm.db=req.data;
             }).catch(function (error) {

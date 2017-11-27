@@ -1,17 +1,17 @@
 
 <template>
 	<div id="message">
-        <div class="card card-1 h-100 w-100 rounded-circle" @click="c_click"> 
+        <div class="card card-1 h-100 w-100 rounded-circle" @click="c_click" > 
             <i class="material-icons">&#xE0C9;</i>
             <span class="rounded-circle dotted bg-danger" v-if="visitedArr.length>=1"></span>                     
         </div>
-        <div class="card card-2" v-if="flag">
+        <div class="card card-2" v-if="this.$store.state.massageflag">
             <div v-if="visitedArr.length==0 && events.length==0">暂无消息</div>
             <ul class="list-group list-group-flush" v-else>
                 <li class="list-group-item" v-if="visitedArr.length!=0">
                     今天是探访独居老人的日子，请及时到访！
                 </li>
-                <li class="list-group-item"  v-if="events!=0">
+                <li class="list-group-item"  v-if="events.length!=0">
                     有偷盗案件，请及时解决
                 </li>
                 <li class="list-group-item" v-if="visitedArr.length!=0">
@@ -30,7 +30,6 @@
 		data(){
 			return {
                 visitedArr:[],
-                flag:false,
                 events:[]
 
 				
@@ -38,12 +37,8 @@
 		},
         methods:{
             c_click(){
-                if(this.flag){
-                    this.flag=false;
-                }else{
-                    this.flag=true;
-                }
-            }
+                this.$store.commit('massageFlagHide')
+            },
         },
 		mounted() {
             let vm=this;
@@ -56,8 +51,6 @@
             });
             axios.post('/events').then(function(req){
                  vm.events=req.data.event;
-                console.log('--------events==============');
-                console.log(vm.events);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -73,6 +66,7 @@
     height:50px;
     bottom:20px;
     right:20px;
+    z-index: 90000;
 }
 .card-1{
     background-color:rgba(0,0,0,.4);

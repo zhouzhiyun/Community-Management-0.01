@@ -2,14 +2,16 @@
 <template>
 	<div>
 		<div id="map"></div>
+
 		<building-deatils  v-if="this.$store.state.show"></building-deatils>
         <my-sidebar></my-sidebar>
 		<my-search></my-search>
+        <message></message>
 		<my-details v-if="this.$store.state.detailsShow"></my-details>
         <recorded v-if="this.$store.state.record"></recorded>
-        <message></message>
-        <event-handing v-if="this.$store.state.eventHand"></event-handing>
+        <event-handing v-show="this.$store.state.eventHand"></event-handing>
         <user-manage v-if="this.$store.state.usermanage"></user-manage>
+        
 	</div>
 </template>
 

@@ -1,6 +1,6 @@
 
 <template>
-	<div id="event" v-if="disp">
+	<div id="event">
 		<div class="card w-100 h-100">
             <ul class="nav nav-tabs  nav-justified" id="myTab" role="tablist">
                 <li class="nav-item">
@@ -188,7 +188,6 @@
 	export default {
 		data(){
 			return {
-                disp:true,
                 date:"",
                 olders:[
                     {
@@ -272,7 +271,7 @@
                 }
             },
             cancel(){
-                this.disp=false;
+                this.$store.commit('eventHandHide')
                 this.initEvent();
             },
             save(){
@@ -283,7 +282,7 @@
                 }
                 vm.eventArr.push(vm.event);
                 vm.initEvent();
-                vm.disp=false; 
+                vm.$store.commit('eventHandHide') 
                 axios.post('/saveEvent',{
                     event:vm.eventArr
                 }).then(function(req){
@@ -299,6 +298,7 @@
             
         },
 		mounted () {
+            console.log('e-----------------------------');
             var dt=new Date();
             var vm=this;
             vm.date=dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();

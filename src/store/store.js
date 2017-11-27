@@ -18,11 +18,19 @@ const store = new Vuex.Store({
        buildingId: '',
        usermanage: false, // 用户管理
        eventHand: false, //  事件处理
-       record:false  // 信息录入
+       record:false , // 信息录入
+       massage: false , // 消息提醒
+       massageflag: false // 消息弹出
     },
 	mutations:{
         changeVal(state, payload){
             state.show = true;
+            state.usermanage = false;
+            state.eventHand = false;
+            state.record = false;
+            state.massage = false;
+            state.detailsShow = false;
+            state.massageflag = false;
             state.building = payload.text;
         },
         changeShow(state){
@@ -31,6 +39,7 @@ const store = new Vuex.Store({
         changeRoomNum(state, payload){
             state.detailsShow = true;
             state.show = false;
+            state.massageflag = false;
             state.roomInfo = payload.roomInfo;
             state.owner = payload.owner;
             state.tenants = payload.tenants;
@@ -70,6 +79,10 @@ const store = new Vuex.Store({
                 state.usermanage = true;
                 state.eventHand = false;
                 state.record = false;
+                state.massage = false;
+                state.show = false;
+                state.detailsShow = false;
+                state.massageflag = false;
             }
         },
         eventHandHide(state){
@@ -79,6 +92,10 @@ const store = new Vuex.Store({
                 state.usermanage = false;
                 state.eventHand = true;
                 state.record = false;
+                state.massage = false;
+                state.show = false;
+                state.detailsShow = false;
+                state.massageflag = false;
             }
         },
         recordHide(state){
@@ -88,6 +105,27 @@ const store = new Vuex.Store({
                 state.usermanage = false;
                 state.eventHand = false;
                 state.record = true;
+                state.massage = false;
+                state.show = false;
+                state.detailsShow = false;
+                state.massageflag = false;
+            }
+        },
+        massageHide(state){
+            if(state.massage){
+                state.massage = false;
+            }else{
+                state.usermanage = false;
+                state.eventHand = false;
+                state.record = false;
+                state.massage = true;
+            }
+        },
+        massageFlagHide(state){
+            if(state.massageflag){
+                state.massageflag = false;
+            }else{
+                state.massageflag = true; 
             }
         }
     }

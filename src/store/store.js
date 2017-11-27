@@ -21,7 +21,8 @@ const store = new Vuex.Store({
        record:false , // 信息录入
        massage: false , // 消息提醒
        massageflag: false ,// 消息弹出
-       width: "585px"
+       width: "585px",
+       addTenantShow: false
     },
 	mutations:{
         changeWidth(state){
@@ -134,6 +135,13 @@ const store = new Vuex.Store({
                 state.massageflag = false;
             }else{
                 state.massageflag = true; 
+            }
+        },
+        changeAddTenant(state){
+            if(state.addTenantShow){
+                state.addTenantShow = false; 
+            }else{
+                state.addTenantShow = true;
             }
         }
     }

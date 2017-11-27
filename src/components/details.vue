@@ -24,10 +24,10 @@
 						<td scope="row">{{ tenant.name }}</td>
 						<td colspan="2">{{ tenant.IDcard }}</td>
 						<td>{{ tenant.phone }}</td>
-						<td>无</td>
+						<td>{{ tenant.deadline }}</td>
 						<td v-text="recorder"></td>
 					</tr>
-					
+					<tr v-show="addShow"><td colspan="6" style="text-align:center;cursor: pointer;color:red;"><b @click="showTenant">添加</b></td></tr>
 				</tbody>
 			</table>
 			<div class="card-footer bg-transparent">
@@ -64,11 +64,11 @@
 				</ul>
 			</div>
 		</div>
+
 		<div class="card" v-if="tip"
 		style="width:260px;min-height:200px;position: absolute;right: 600px;top: 0;">
-			
-
 		</div>
+
 		<div class="card" style="width:150px;position: absolute;" v-show="menuShow" id="menu" ref="menu">
 			<div class="list-group list-group-flush">
 				<a style="cursor: pointer;" class="list-group-item list-group-item-action" @click="detEdit">编辑</a>
@@ -77,7 +77,6 @@
 			</div>
 		</div>
 		
-		<!--房主编辑-->
 		<div class="card" id="household" v-if="houseOwnerEdit" style="width:340px; height:450px; position:absolute;left: 0;top:0; right: 0; margin: auto;">
 			<div class="d-flex justify-content-around">
 				<div @click="ownerEdit" class="btn btn-secondary" role="button">房主编辑</div>
@@ -157,6 +156,14 @@
 								
 							</select>
 						</div>
+						<div>
+							<span class="ownerinfo">低保户</span>
+							<select name="" id="" v-model="owner.lowsecurity" class="ownersel">
+								<option value="true">是</option>
+								<option value="false">否</option>
+								
+							</select>
+						</div>
 					</div>
 
 					
@@ -223,17 +230,23 @@
 								
 							</select>
 						</div>
+						<div>
+							<span class="ownerinfo">低保户</span>
+							<select name="" id="" v-model="owner.lowsecurity" class="ownersel">
+								<option value="true">是</option>
+								<option value="false">否</option>
+								
+							</select>
+						</div>
 					</div>
-
-
-
 					<div class="d-flex justify-content-around" style="margin-top:10px;">
 						<button type="button" class="btn btn-primary btn-sm" @click="cancel">取消</button>
 						<button type="button" class="btn btn-primary btn-sm" @click="save">保存</button>
 					</div>
 				</div>
-			</div>			
+			</div>	
 		</div>
+		<addTenant v-if="this.$store.state.addTenantShow"></addTenant>
 	</div>
 </template>
 
@@ -243,6 +256,7 @@
 	}
 	import axios from 'axios';
 	import $ from 'jquery';
+	import addTenant from './addTenant.vue';
 	export default {
 		data(){
 			return {
@@ -258,7 +272,8 @@
 				index: '',
 				json: [],
 				hisIndex: 0,
-				recorder: this.$store.state.tenants[0].recorder
+				recorder: this.$store.state.tenants[0].recorder,
+				addShow: true
 			}
 		},
 		methods: {
@@ -394,22 +409,83 @@
 			first(){
 				this.hisIndex = 0;
 				this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+				this.addShow = true;
 			},
 			last(){
 				this.hisIndex = this.$store.state.tenants.length - 1;
 				this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+				this.addShow = false;
 			},
 			next(){
 				if(this.hisIndex < this.$store.state.tenants.length - 1){
 					this.hisIndex += 1;
 					this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+					this.addShow = false;
+				}
+				if(this.hisIndex == 0){
+					this.addShow = true;
 				}
 			},
 			previous(){
 				if(this.hisIndex > 0){
 					this.hisIndex -= 1;
 					this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+					this.addShow = false;
 				}
+				if(this.hisIndex == 0){
+					this.addShow = true;
+				}
+			},
+			showTenant(){
+				let vm = this;
+				if(vm.hisIndex == 0){
+					switch(vm.$store.state.modify){
+						case "1":
+							vm.$store.commit('changeAddTenant')
+							break;
+						case "2": 
+							if(vm.$store.state.building == "1#" || vm.$store.state.building == "2#" || vm.$store.state.building == "3#"){
+								vm.$store.commit('changeAddTenant')
+							}else{
+								alert("没有操作权限")
+							}
+							break;
+						case "3":
+							if(vm.$store.state.building == "4#" || vm.$store.state.building == "5#" || vm.$store.state.building == "6#" || vm.$store.state.building == "7#"){
+								vm.$store.commit('changeAddTenant')
+							}else{
+								alert("没有操作权限")
+							}
+							break;
+						case "4":
+							if(vm.$store.state.building == "8#" || vm.$store.state.building == "9#" || vm.$store.state.building == "10#"){
+								vm.$store.commit('changeAddTenant')
+							}else{
+								alert("没有操作权限")
+							}
+							break;
+						case "5":
+							if(vm.$store.state.building == "11#" || vm.$store.state.building == "12#" || vm.$store.state.building == "13#" || vm.$store.state.building == "14#"){
+								vm.$store.commit('changeAddTenant')
+							}else{
+								alert("没有操作权限")
+							}
+							break;
+						case "6":
+							if(vm.$store.state.building == "15#" || vm.$store.state.building == "16#" || vm.$store.state.building == "17#" || vm.$store.state.building == "18#"){
+								vm.$store.commit('changeAddTenant')
+							}else{
+								alert("没有操作权限")
+							}	
+							break;
+						case "7":
+							alert("没有操作权限")
+							break;
+						default:
+							break;
+					}
+				}
+				
 			}
 		},
 		mounted(){
@@ -439,6 +515,7 @@
 			}
 		},
 		components: {
+			addTenant
 		}
 	}
 	

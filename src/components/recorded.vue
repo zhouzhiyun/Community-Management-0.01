@@ -354,6 +354,18 @@
             },            
             add(){
                 let vm=this;
+                for(let key in vm.houseInfo){
+                    if(!vm.houseInfo[key]){
+                        alert('请将信息添加完整');
+                        return;
+                    }
+                }
+                for(let key in vm.ownerInfo){
+                    if(!vm.ownerInfo[key]){
+                        alert('请将信息添加完整');
+                        return;
+                    }
+                }
                 var flag=true;
                 //保存所有录入信息
                 this.$store.commit('recordHide')

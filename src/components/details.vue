@@ -32,8 +32,9 @@
 			</table>
 			<div class="card-footer bg-transparent">
 				<small class="text-muted">
-					<span class="symbol" v-for="mark in this.$store.state.roomInfo.type" v-html="mark">
+					<span class="symbol" style="font-size:30px;" v-for="mark in this.$store.state.roomInfo.type" v-html="mark">
 					</span>
+					<span  class="symbol material-icons" @click="c_video" style="cursor:pointer;" v-if="this.$store.state.building=='18#' && this.$store.state.roomInfo.roomId==3108">&#xE04B;</span>
 				</small>	
 				<button type="button" class="btn btn-secondary float-right btn-sm mx-2" @click="goback">返回</button>			
 				<ul class="pagination float-right" style="margin:0;padding:0;">
@@ -64,10 +65,63 @@
 				</ul>
 			</div>
 		</div>
+		<!-- word图片-->
 		<div class="card" v-if="tip"
-		style="width:260px;min-height:200px;position: absolute;right: 600px;top: 0;">
-			
+			style="width:400px;min-height:200px;max-height:535px;overflow-y:auto;position: absolute;right: 570px;top: 0;">
+			<div v-if="this.$store.state.building=='18#' && this.$store.state.roomInfo.roomId==3108">
+				<h6 class="text-center">管控人员</h6>
+				<p>
+				管控人员<br>
 
+				1、周晓岗：身份证号320113195707132088，离异，籍贯江苏宜兴，2004年9月7日将自己写的‘严正声明’交给暂住在下关区新民村59号的李雪峰，让其上传至法轮功网站，被列为“组织和利用邪教组织破坏法律实施案”。<br>
+				2、儿子：周思明，身份证号320106198201022818。<br>
+				联系电话：13815874265。<br>
+				3、孙女：周逸楠，身份证号320106201311050822。<br>
+				户籍地均在：南京市鼓楼区水佐岗15巷1栋104室<br>
+				现住地址：南京栖霞区燕升园9栋1910室。<br>
+				</p>
+			</div>
+			<div v-if="this.$store.state.building=='15#' && this.$store.state.roomInfo.roomId==604">
+				<img  src="../assets/daichangmei.png" style="vertical-align:bottom" width="80" height="100"/>				
+				<big><strong>戴</strong></big>昌美，女，1946年1月出生，1965年4月加入中国共产党，居住在燕升园12-604。
+				栖霞区建筑劳动服务公司党支部书记退休。戴昌美同志自2015年11月17日将党员组织关系转入山水园社区党支部以来，
+				严格遵守党支部的各项规章制度，按时参加党支部组织的各项活动，积极投身于社区志愿者队伍，充分发挥了党员的模范带头作用，
+				她将退休后的生活扎根在了社区、将退休后的时光献给了小区居民，在山水园社区树立了标杆。
+			</div>
+			<div v-if="this.$store.state.building=='17#' && this.$store.state.roomInfo.roomId==2502">
+				<h6 class="text-center">志愿者风采展示</h6>
+				<img  src="../assets/volunteer.png" style="float:left" width="120" height="140"/>				
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;孙学林于2015年9月任燕升园14栋楼栋长，孙师傅还是山水园社区巡逻队的负责人，他在巡逻队的队长岗位上默默耕耘，
+				为社区的卫生和安全环境无私奉献；他助人为乐，为居民调解矛盾，为左邻右舍排忧解难，为孤寡独居老人送去关怀。他任劳任怨，
+				照顾癌症戏友直至生命的最后一刻；他生活简朴，不计较个人得失，无私地组织了一场又一场扬剧表演，为居民带来欢乐；
+				他独自一人生活，却因为自己的热情善行将左邻右舍团结成一家人，给巡逻队带来一股凝聚力，他所在的地方总是一个大家庭；
+				他年逾花甲，从朝气蓬勃到如今两鬓斑白，一直秉持着助人为乐的精神，依旧活跃在扬剧舞台上，活跃在为民服务的平台上，
+				尽自己的力量，为社会添一份温暖与感动！
+			</div>
+			<div v-if="this.$store.state.building=='16#' && this.$store.state.roomInfo.roomId==306">
+				<div class="text-center my-1">
+					<img  src="../assets/dibaohu.png"  width="180" height="140"/>
+					<p class="text-center">封铜昌</p>
+				</div>			
+				<p>								
+					一、家庭自然情况：<br>
+					1、家庭住址： 栖霞区华银路20号14幢一单元1808室。<br>
+					2、家庭共同居住人员数及相互关系： 一人居住。<br>
+					3、住房情况： 现住华银路20号14幢二单元808室为拆迁安置房。<br>
+					二、家庭成员状况：<br>
+					1、婚姻状况： 离异<br>
+					2、身体状况： 一般<br>
+					3、工作性质和工作单位： 无<br>
+					三、实际收入情况： 封铜昌无劳保收入，儿子、儿媳妇均无业，无赡养能力。    <br>        
+					四、赡（抚）养情况：  封铜昌与魏秀珍离婚有一子封奇安已婚，    儿子、儿媳周凤无业，无赡养能力。<br>                                                          
+					五、综合困难情况：  封铜昌曾因触犯法律而坐牢，2008年2月刑满释放，劳动年龄段因有前科找不到工作，现无退休金无收入，同时其儿子、儿媳妇无业，无赡养能力，生活困难.
+				</p>
+			</div>
+		</div>
+		<div class="card" v-if="video" style="width:400px;hieht:320px;position: absolute;right: 570px;top: 260px;">
+			<video src="../assets/test.mp4" class="card-img-top" style="object-fit:fill;" controls="controls">
+				您的浏览器不支持 video 标签。
+			</video>
 		</div>
 		<div class="card" style="width:150px;position: absolute;" v-show="menuShow" id="menu" ref="menu">
 			<div class="list-group list-group-flush">
@@ -224,9 +278,6 @@
 							</select>
 						</div>
 					</div>
-
-
-
 					<div class="d-flex justify-content-around" style="margin-top:10px;">
 						<button type="button" class="btn btn-primary btn-sm" @click="cancel">取消</button>
 						<button type="button" class="btn btn-primary btn-sm" @click="save">保存</button>
@@ -258,7 +309,8 @@
 				index: '',
 				json: [],
 				hisIndex: 0,
-				recorder: this.$store.state.tenants[0].recorder
+				recorder: this.$store.state.tenants[0].recorder,
+				video:false
 			}
 		},
 		methods: {
@@ -410,23 +462,43 @@
 					this.hisIndex -= 1;
 					this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
 				}
+			},
+			c_video(){
+				if(this.video){
+					this.video=false;
+				}else{
+					this.video=true;
+				}
 			}
 		},
 		mounted(){
 			let vm = this;
 			vm.owner = vm.$store.state.owner;
+			if(vm.$store.state.building=='18#' && vm.$store.state.roomInfo.roomId==3108 ||
+			vm.$store.state.building=='15#' && vm.$store.state.roomInfo.roomId==604 ||
+			vm.$store.state.building=='17#' && vm.$store.state.roomInfo.roomId==2502 ||
+			vm.$store.state.building=='16#' && vm.$store.state.roomInfo.roomId==306){
+				vm.tip=true;
+			}else{
+				vm.tip=false;
+			}
+			
 			$.ajax({
-					method: 'POST',
-					url: '/getString',
-					dataType: 'json',
-					async: true,
-					success: function(res){
-						vm.json = res;
-					},
-					error: function(err){
-						console.log(err)
-					}
-				})
+				method: 'POST',
+				url: '/getString',
+				dataType: 'json',
+				async: true,
+				success: function(res){
+					vm.json = res;
+				},
+				error: function(err){
+					console.log(err)
+				}
+			});
+
+			if(!this.$store.state.detailsShow){
+				this.video=false;
+			}
 		},
 		watch:{
 			menuShow:function(value){

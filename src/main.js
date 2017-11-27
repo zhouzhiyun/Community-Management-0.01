@@ -8,11 +8,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './app.vue';
 
 Vue.use(VueEvents);
-<<<<<<< HEAD
-=======
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
->>>>>>> zhou
 Vue.use(ElementUI)
 
 const app = new Vue({

@@ -65,11 +65,8 @@
 				</ul>
 			</div>
 		</div>
-<<<<<<< HEAD
 
-		<div class="card" v-if="tip"
-		style="width:260px;min-height:200px;position: absolute;right: 600px;top: 0;">
-=======
+		
 		<!-- word图片-->
 		<div class="card" v-if="tip"
 			style="width:400px;min-height:200px;max-height:535px;overflow-y:auto;position: absolute;right: 570px;top: 0;">
@@ -124,10 +121,9 @@
 			</div>
 		</div>
 		<div class="card" v-if="video" style="width:400px;hieht:320px;position: absolute;right: 570px;top: 260px;">
-			<video src="../assets/test.mp4" class="card-img-top" style="object-fit:fill;" controls="controls">
+			<video src="../assets/test.mp4" class="card-img-top" style="object-fit:fill;" autoplay controls="controls">
 				您的浏览器不支持 video 标签。
 			</video>
->>>>>>> zhou
 		</div>
 
 		<div class="card" style="width:150px;position: absolute;" v-show="menuShow" id="menu" ref="menu">
@@ -309,6 +305,7 @@
 		</div>
 		<addTenant v-if="this.$store.state.addTenantShow"></addTenant>
 	</div>
+
 </template>
 
 <script>
@@ -334,11 +331,8 @@
 				json: [],
 				hisIndex: 0,
 				recorder: this.$store.state.tenants[0].recorder,
-<<<<<<< HEAD
-				addShow: true
-=======
+				addShow: true,
 				video:false
->>>>>>> zhou
 			}
 		},
 		methods: {
@@ -550,9 +544,6 @@
 							break;
 					}
 				}
-<<<<<<< HEAD
-				
-=======
 			},
 			c_video(){
 				if(this.video){
@@ -560,7 +551,6 @@
 				}else{
 					this.video=true;
 				}
->>>>>>> zhou
 			}
 		},
 		mounted(){

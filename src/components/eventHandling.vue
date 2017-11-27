@@ -31,14 +31,13 @@
                                     <th scope="col">单元</th>
                                     <th scope="col">房号</th>
                                     <th scope="col">姓名</th>
-                                    <th scope="col">身份证</th>
-                                    
+                                    <th scope="col">身份证</th>                                    
                                     <th scope="col">电话</th>
                                     <th scope="col">出租截止日期</th>                                    
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="(older,index) in olders">
+                                <tr v-for="(older,index) in lends">
                                     <td>{{older.building}}</td>
                                     <td>{{older.unit}}</td>
                                     <td>{{older.roomNumber}}</td>
@@ -275,6 +274,49 @@
                         visited:false
                     }
                 ],
+                lends:[
+                    {
+                        building:15,
+                        unit:1,
+                        roomNumber:201,
+                        name:"王苏新",
+                        IDCard:"320113193567909083",
+                        phone:'12345678909',
+                        date:"",
+                        visited:false
+                    },
+                    {
+                        building:16,
+                        unit:1,
+                        roomNumber:204,
+                        name:"王玉文",
+                        IDCard:"320113193567909083",
+                        phone:'12345678909',
+                        date:"",
+                        visited:false
+                    },
+                    {
+                        building:17,
+                        unit:1,
+                        roomNumber:302,
+                        name:"刘宝山",
+                        IDCard:"320113193567909083",
+                        phone:'12345678909',
+                        date:"",
+                        visited:false
+                    },
+                    {
+                        building:18,
+                        unit:1,
+                        roomNumber:602,
+                        name:"徐桂仁",
+                        IDCard:"320113193567909083",
+                        phone:'12345678909',
+                        date:"",
+                        visited:false
+                    }
+                ],
+
                 event:{
                     number:"",
                     village:"燕升园",
@@ -347,11 +389,14 @@
             var dt=new Date();
             var vm=this;
             vm.date=dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();
-            for(var i in vm.olders){
+            for(let i in vm.olders){
                 vm.olders[i].date=vm.date;
             }  
+            for(let i in vm.lends){
+                vm.lends[i].date=vm.date;
+            } 
             
-            vm.$events.emit('visited',vm.olders);
+            vm.$events.emit('visited',{older:vm.olders,lend:vm.lends});
             axios.post("/events").then(function(req){
                 vm.eventArr=JSON.parse(JSON.stringify(req.data.event)).event;                
             }).catch(function(err){

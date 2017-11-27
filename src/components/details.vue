@@ -5,7 +5,7 @@
 			<table class="table table-bordered">
 				<thead>
 					<tr>
-						<th scope="col">{{ this.$store.state.roomInfo.roomId }}</th>
+						<th scope="col" :style="{'background': this.$store.state.roomInfo.color}">{{ this.$store.state.roomInfo.roomId }}</th>
 						<th scope="col">房主姓名</th>
 						<th scope="col">{{ this.$store.state.owner.name }}</th>
 						<th scope="col">联系电话</th>
@@ -20,7 +20,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="tenant in this.$store.state.tenants[0].tenantInfo">
+					<tr v-for="tenant in this.$store.state.tenants[hisIndex].tenantInfo">
 						<td scope="row">{{ tenant.name }}</td>
 						<td colspan="2">{{ tenant.IDcard }}</td>
 						<td>{{ tenant.phone }}</td>
@@ -32,7 +32,7 @@
 			</table>
 			<div class="card-footer bg-transparent">
 				<small class="text-muted">
-					<span class="symbol" v-for="mark in this.$store.state.mark" v-html="mark">
+					<span class="symbol" v-for="mark in this.$store.state.roomInfo.type" v-html="mark">
 					</span>
 				</small>	
 				<button type="button" class="btn btn-secondary float-right btn-sm mx-2" @click="goback">返回</button>			
@@ -202,8 +202,8 @@
 						<div>
 							<span class="ownerinfo">政治面貌</span>
 							<select name="" id="" v-model="tenant.politicalStatus" class="ownersel">
-								<option value="党员">党员</option>
 								<option value="群众">群众</option>
+								<option value="党员">党员</option>
 							</select>
 						</div>
 						<div>
@@ -248,14 +248,15 @@
 				tip:false,
 				menuShow:false,
 				houseOwnerEdit:false,
-				recorder: this.$store.state.tenants[0].recorder,
 				ownerShow: true,
 				tenter: false,
 				owner: {},
 				tenant: {},
 				text: 'owner',
 				index: '',
-				json: []
+				json: [],
+				hisIndex: 0,
+				recorder: this.$store.state.tenants[0].recorder
 			}
 		},
 		methods: {
@@ -389,16 +390,24 @@
 				this.tenant = tenants;
 			},
 			first(){
-
+				this.hisIndex = 0;
+				this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
 			},
 			last(){
-
+				this.hisIndex = this.$store.state.tenants.length - 1;
+				this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
 			},
 			next(){
-
+				if(this.hisIndex < this.$store.state.tenants.length - 1){
+					this.hisIndex += 1;
+					this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+				}
 			},
 			previous(){
-
+				if(this.hisIndex > 0){
+					this.hisIndex -= 1;
+					this.recorder = this.$store.state.tenants[this.hisIndex].recorder;
+				}
 			}
 		},
 		mounted(){

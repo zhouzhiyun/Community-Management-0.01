@@ -7,16 +7,17 @@
                 <span aria-hidden="true" @click="close">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="lists" >
-                <div class="list" v-for="room in this.$store.state.house">
-                    <span class="text" style="cursor: pointer;" @click="edit(room)">{{ room.roomInfo.roomId }}</span>
-                    <span class="text">
-                        <span v-for="type in room.roomInfo.type" v-html="type"></span>
-                    </span>
+            
+            <div class="modal-body">
+                <div :style="{width: this.$store.state.width}" id="lists">
+                    <div class="list" v-for="room in this.$store.state.house">
+                        <span class="text" :style="{'cursor': 'pointer','background-color': room.roomInfo.color}" @click="edit(room)">{{ room.roomInfo.roomId }}</span>
+                        <span class="text">
+                            <span v-for="type in room.roomInfo.type" v-html="type"></span>
+                        </span>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="close">返回</button>
+                
             </div>
         </div>
     </div>
@@ -27,7 +28,8 @@ export default {
     
   data(){
       return {
-         rooms: '' 
+         rooms: '' ,
+         
       }
   },
   methods: {
@@ -35,20 +37,25 @@ export default {
           this.$store.commit('changeShow');
       },
       edit(room){
+          console.log(room)
           this.$store.commit('changeRoomNum', room)
       }
+  },
+  mounted(){
+      let build = this.$store.state.building;
+    //   if(this.$store.state.building){}
   }
 }
 </script>
 <style scoped>
 #detail{
-    width: 450px;
+    width: 585px;
     height: 500px;
     right: 20px;
     top: 75px;
+    overflow-y: scroll;
 }
 #lists{
-    overflow-y: scroll;
     display: flex;
     flex-wrap: wrap;
 }

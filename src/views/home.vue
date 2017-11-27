@@ -82,34 +82,9 @@
 	
 	// 山水园社区楼号和单元
 	function creatCorver (building, map, that){
-       
         building.forEach(function(e) {
             var point = new BMap.Point(e.lng, e.lat)
-            if(e.text == "15#" || e.text == "16#" || e.text == "17#" || e.text == "18#"){
-                creatPie(point , that , e.text, map);
-            }else{
-                var opts = {
-                position : point,   // 指定文本标注所在的地理位置
-                offset: new BMap.Size(-10, -10)
-            }
-            var label = new BMap.Label(e.text, opts);  // 创建文本标注对象
-            label.setStyle({
-                color : "yellow",
-                fontSize : "12px",
-                height : "16px",
-                lineHeight : "16px",
-                fontFamily:"微软雅黑",
-                border: "none",
-                backgroundColor: "rgba(0,0,0,0)",
-                fontWeight: "800"
-			});
-			label.addEventListener('click',function(){
-                that.$store.commit('changeVal',{text:e.text});
-                that.$store.commit('getData')
-			})
-			map.addOverlay(label);
-            }
-            
+            creatPie(point , that , e.text, map);
         });
     }
 
@@ -145,30 +120,25 @@
                     text: ''
                 },
                 tooltip: {
-                    headerFormat: '{series.name}br',
-                    pointFormat: ''
+                    pointFormat: '<b>{point.percentage:.1f}%</b>'
                 },
                 plotOptions: {
                     pie: {
                         allowPointSelect: false,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: false,
-                            format: 'b{point.name}b {point.percentage.1f} %',
-                            style: {
-                                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                            }
+                            enabled: false
                         }
                     }
                 },
                 series: [{
                     type: 'pie',
-                    name: '浏览器访问量占比',
+                    name: '房屋比例',
                     data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        ['Safari',    8.5],
-                        ['Opera',     6.2]
+                        ['空房',   45.0],
+                        ['出租房',       26.8],
+                        ['未拿房',    8.5],
+                        ['自住房',     6.2]
                     ]
                 }]
             })
@@ -176,6 +146,7 @@
             div.addEventListener('click',function(){
                 that.$store.commit('changeVal',{text: text});
                 that.$store.commit('getData');
+                that.$store.commit('changeWidth')
             })
 
             this._div = div;

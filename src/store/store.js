@@ -20,9 +20,17 @@ const store = new Vuex.Store({
        eventHand: false, //  事件处理
        record:false , // 信息录入
        massage: false , // 消息提醒
-       massageflag: false // 消息弹出
+       massageflag: false ,// 消息弹出
+       width: "585px"
     },
 	mutations:{
+        changeWidth(state){
+            if(state.building == "9#" || state.building == "10#" || state.building == "14#" || state.building == "17#"){
+                state.width = "730px"
+           }else{
+            state.width = "585px"
+           }
+        },
         changeVal(state, payload){
             state.show = true;
             state.usermanage = false;
